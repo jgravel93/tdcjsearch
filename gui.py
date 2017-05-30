@@ -133,6 +133,7 @@ button = widgets.Button(description="Test Data")
 def on_button_clicked(b):
     print('Loading....')
     table=getTestTable()
+    table.to_csv('testtableoutput.csv')
     
     return displaytable(table)
 
@@ -143,6 +144,7 @@ sidtext=widgets.Text(
 def handle_submit(sender):
     print('Loading....')
     table=getInmateInfoNum(sidtext.value)
+    table.to_csv('sidoutput.csv')
     
     return displaytable(table)
 
@@ -154,6 +156,7 @@ def handle_submit2(sender):
     print('Loading....')
     df=openOwnTable(pathtext.value)
     table=getOwnTable(df)
+    table.to_csv('list_output.csv')
     return displaytable(table)
 button.on_click(on_button_clicked)
 sidtext.on_submit(handle_submit)
