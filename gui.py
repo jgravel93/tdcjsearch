@@ -2,6 +2,7 @@ from inmatesearch import *
 from ipywidgets import *
 from ipywidgets import widgets
 from IPython.display import display
+from datetime import datetime
 
 pd.set_option("display.max_columns",14)
 input_form = """
@@ -144,7 +145,9 @@ sidtext=widgets.Text(
 def handle_submit(sender):
     print('Loading....')
     table=getInmateInfoNum(sidtext.value)
-    table.to_csv('sidoutput.csv')
+    ctime=datetime.now().strftime('%Y-%m-%d-%H.%M.%S')
+    table.to_csv('sidoutput_%s.csv' % ctime)
+    
     
     return displaytable(table)
 
@@ -156,7 +159,8 @@ def handle_submit2(sender):
     print('Loading....')
     df=openOwnTable(pathtext.value)
     table=getOwnTable(df)
-    table.to_csv('list_output.csv')
+    ctime=datetime.now().strftime('%Y-%m-%d_%H.%M.%S')
+    table.to_csv('list_output_%s.csv' % ctime)
     return displaytable(table)
 button.on_click(on_button_clicked)
 sidtext.on_submit(handle_submit)
