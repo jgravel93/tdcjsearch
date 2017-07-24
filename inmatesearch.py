@@ -13,7 +13,7 @@ def getInmateInfo(filepath, header=None, names=None, idfield=None, savepath=None
     sids=['%08d'% int(x) for x in df[idfield].tolist() if math.isnan(x)==False]
     inmates={}
     maxhxnum=0
-    colnames=['SID Number',
+    colnames=['SID_searched','SID Number',
      'TDCJ Number',
      'Name',
      'Race',
@@ -41,6 +41,7 @@ def getInmateInfo(filepath, header=None, names=None, idfield=None, savepath=None
         fvs=list(zip(fields,values))
         values_hx=[x.get_text().rstrip().lstrip() for x in soup.table.findAll('tr')]
         inmates[e]={}
+        inmates[e]['SID_searched']=str(s)
         for(f,v) in fvs:
             inmates[e][str(f)]=v
         fields_hx=[x for x in values_hx[0].split('\n')]
@@ -146,7 +147,7 @@ def getInmateInfoList(df):
     sids=['%08d'% int(x) for x in sids if math.isnan(x)==False]
     inmates={}
     maxhxnum=0
-    colnames=['SID Number',
+    colnames=['SID_searched','SID Number',
      'TDCJ Number',
      'Name',
      'Race',
@@ -174,6 +175,7 @@ def getInmateInfoList(df):
         fvs=list(zip(fields,values))
         values_hx=[x.get_text().rstrip().lstrip() for x in soup.table.findAll('tr')]
         inmates[e]={}
+        inmates[e]['SID_searched']=str(s)
         for(f,v) in fvs:
             inmates[e][str(f)]=v
         fields_hx=[x for x in values_hx[0].split('\n')]
